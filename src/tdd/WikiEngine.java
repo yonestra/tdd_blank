@@ -17,15 +17,28 @@ public class WikiEngine {
 		patterns.put("======", "h6");
 		
 		if(string != null && string.length() > 0) {
-			String[] strArr = string.trim().split(" ");
-			if(strArr.length == 3) {
-				String tagBefore = patterns.get(strArr[0]);
-				String tagAfter = patterns.get(strArr[2]);
-				if(tagBefore != null && tagAfter != null && tagBefore.equals(tagAfter)) {
-					return "<" + tagBefore + ">" + strArr[1] + "</" + tagAfter + ">";
+			String[] lines = string.trim().split("\n");
+			StringBuilder sb = new StringBuilder();
+			boolean isFirst = true;
+			for(String line : lines) {
+				String[] strArr = line.trim().split(" ");
+				if(!isFirst) {
+					sb.append("<br/>");
 				}
+				if(strArr.length == 3) {
+					String tagBefore = patterns.get(strArr[0]);
+					String tagAfter = patterns.get(strArr[2]);
+					if(tagBefore != null && tagAfter != null && tagBefore.equals(tagAfter)) {
+						sb.append("<" + tagBefore + ">" + strArr[1] + "</" + tagAfter + ">");
+					} else {
+						sb.append(line);
+					}
+				} else {
+					sb.append(line);
+				}
+				isFirst = false;
 			}
-			return string;
+			return sb.toString();
 		} else {
 			return "";
 		}
