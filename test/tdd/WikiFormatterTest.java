@@ -31,4 +31,10 @@ public class WikiFormatterTest {
 		String actual = formatter.h1(null);
 		assertThat(actual, is(""));
 	}
+	
+	@Test
+	public void h1_blank() throws Exception {
+		String actual = formatter.h1("");
+		assertThat(actual, is(""));
+	}
 }
