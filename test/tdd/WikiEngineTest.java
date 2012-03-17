@@ -34,6 +34,7 @@ public class WikiEngineTest {
 				{ "===== Headline =====", "<h5>Headline</h5>" },
 				{ "====== Headline ======", "<h6>Headline</h6>" },
 				{ "======= Headline =======", "======= Headline =======" },
+				{ "== Headline ===", "== Headline ===" },
 		};
 		return Arrays.asList(params);
 	}
