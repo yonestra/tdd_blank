@@ -29,7 +29,7 @@ public class WikiEngine {
 					String tagBefore = patterns.get(strArr[0]);
 					String tagAfter = patterns.get(strArr[2]);
 					if(tagBefore != null && tagAfter != null && tagBefore.equals(tagAfter)) {
-						sb.append("<" + tagBefore + ">" + strArr[1] + "</" + tagAfter + ">");
+						sb.append("<").append(tagBefore).append(">").append(strArr[1]).append("</").append(tagAfter).append(">");
 					} else {
 						sb.append(line);
 					}
