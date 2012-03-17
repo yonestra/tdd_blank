@@ -18,13 +18,14 @@ public class WikiEngine {
 		
 		if(string != null && string.length() > 0) {
 			String[] strArr = string.trim().split(" ");
-			String tagBefore = patterns.get(strArr[0]);
-			String tagAfter = patterns.get(strArr[2]);
-			if(tagBefore != null && tagAfter != null && tagBefore.equals(tagAfter)) {
-				return "<" + tagBefore + ">" + strArr[1] + "</" + tagAfter + ">";
-			} else {
-				return string;
+			if(strArr.length == 3) {
+				String tagBefore = patterns.get(strArr[0]);
+				String tagAfter = patterns.get(strArr[2]);
+				if(tagBefore != null && tagAfter != null && tagBefore.equals(tagAfter)) {
+					return "<" + tagBefore + ">" + strArr[1] + "</" + tagAfter + ">";
+				}
 			}
+			return string;
 		} else {
 			return "";
 		}
