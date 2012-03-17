@@ -1,18 +1,24 @@
 package tdd;
 
+import static org.hamcrest.CoreMatchers.nullValue;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class WikiEngine {
 
 	public String format(String string) {
-		if(string != null && string.length() > 0) { 
+		Map<String, String> patterns = new HashMap<String, String>();
+		patterns.put("=", "h1");
+		patterns.put("==", "h2");
+		patterns.put("===", "h3");
+		patterns.put("====", "h4");
+		
+		if(string != null && string.length() > 0) {
 			String[] strArr = string.split(" ");
-			if(strArr[0].equals("=")) {
-				return "<h1>" + strArr[1] +  "</h1>";
-			} else if (strArr[0].equals("==")) {
-				return "<h2>" + strArr[1] +  "</h2>";
-			} else if (strArr[0].equals("===")) {
-				return "<h3>" + strArr[1] +  "</h3>";
-			} else if (strArr[0].equals("====")) {
-				return "<h4>" + strArr[1] +  "</h4>";
+			String tag = patterns.get(strArr[0]);
+			if(tag != null) {
+				return "<" + tag + ">" + strArr[1] + "</" + tag + ">";
 			} else {
 				return string;
 			}
