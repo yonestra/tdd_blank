@@ -18,27 +18,31 @@ public class WikiEngine {
 		
 		if(string != null && string.length() > 0) {
 			String[] lines = string.trim().split("\n");
-			StringBuilder sb = new StringBuilder();
-			boolean isFirst = true;
-			for(String line : lines) {
-				String[] strArr = line.trim().split(" ");
-				if(!isFirst) {
-					sb.append("<br/>");
-				}
-				if(strArr.length == 3) {
-					String tagBefore = patterns.get(strArr[0]);
-					String tagAfter = patterns.get(strArr[2]);
-					if(tagBefore != null && tagAfter != null && tagBefore.equals(tagAfter)) {
-						sb.append("<").append(tagBefore).append(">").append(strArr[1]).append("</").append(tagAfter).append(">");
+			if(lines.length == 1 && lines[0].equals("")) {
+				return "<br/>";
+			} else {
+				StringBuilder sb = new StringBuilder();
+				boolean isFirst = true;
+				for(String line : lines) {
+					String[] strArr = line.trim().split(" ");
+					if(!isFirst) {
+						sb.append("<br/>");
+					}
+					if(strArr.length == 3) {
+						String tagBefore = patterns.get(strArr[0]);
+						String tagAfter = patterns.get(strArr[2]);
+						if(tagBefore != null && tagAfter != null && tagBefore.equals(tagAfter)) {
+							sb.append("<").append(tagBefore).append(">").append(strArr[1]).append("</").append(tagAfter).append(">");
+						} else {
+							sb.append(line);
+						}
 					} else {
 						sb.append(line);
 					}
-				} else {
-					sb.append(line);
+					isFirst = false;
 				}
-				isFirst = false;
+				return sb.toString();
 			}
-			return sb.toString();
 		} else {
 			return "";
 		}
