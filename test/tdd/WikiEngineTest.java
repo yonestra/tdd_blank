@@ -9,38 +9,34 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.experimental.theories.DataPoints;
+import org.junit.experimental.theories.Theories;
+import org.junit.experimental.theories.Theory;
+import org.junit.runner.RunWith;
 
+@RunWith(Theories.class)
 public class WikiEngineTest {
 
 	public WikiEngine wikiEngine = new WikiEngine();
 	
-	@Test
-	public void h1_Headline() throws Exception {
-		String actual = wikiEngine.format("= Headline =");
-		assertThat(actual, is("<h1>Headline</h1>"));
+	@DataPoints
+	public static String[][] getParameters(){
+		String[][] params = {
+				{"= Headline =", "<h1>Headline</h1>"},
+				{"= Footline =", "<h1>Footline</h1>"},
+				{null, ""},
+				{"", ""},
+				{"== Headline ==", "<h2>Headline</h2>"},
+		};
+		return params;
 	}
 	
-	@Test
-	public void h1_Footline() throws Exception {
-		String actual = wikiEngine.format("= Footline =");
-		assertThat(actual, is("<h1>Footline</h1>"));
-	}
-	
-	@Test
-	public void h1_Null() throws Exception {
-		String actual = wikiEngine.format(null);
-		assertThat(actual, is(""));
-	}
-	
-	@Test
-	public void h1_blank() throws Exception {
-		String actual = wikiEngine.format("");
-		assertThat(actual, is(""));
-	}
-	
-	@Test
-	public void h2_Headline() throws Exception {
-		String actual = wikiEngine.format("== Headline ==");
-		assertThat(actual, is("<h2>Headline</h2>"));
+	@Theory
+	public void format(String[] args){
+		String param = args[0];
+		String expected = args[1];
+
+		String actual = wikiEngine.format(param);
+		assertThat(actual, is(expected));
 	}
 }
