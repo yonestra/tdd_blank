@@ -13,6 +13,8 @@ public class WikiEngine {
 		patterns.put("==", "h2");
 		patterns.put("===", "h3");
 		patterns.put("====", "h4");
+		patterns.put("=====", "h5");
+		patterns.put("======", "h6");
 		
 		if(string != null && string.length() > 0) {
 			String[] strArr = string.split(" ");
