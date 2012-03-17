@@ -17,7 +17,7 @@ public class WikiEngine {
 		patterns.put("======", "h6");
 		
 		if(string != null && string.length() > 0) {
-			String[] strArr = string.split(" ");
+			String[] strArr = string.trim().split(" ");
 			String tagBefore = patterns.get(strArr[0]);
 			String tagAfter = patterns.get(strArr[2]);
 			if(tagBefore != null && tagAfter != null && tagBefore.equals(tagAfter)) {
