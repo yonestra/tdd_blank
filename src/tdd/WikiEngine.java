@@ -1,8 +1,8 @@
 package tdd;
 
-public class WikiFormatter {
+public class WikiEngine {
 
-	public String h1(String string) {
+	public String format(String string) {
 		if(string != null && string.length() > 0) { 
 			String[] strArr = string.split(" ");
 			if(strArr[0].equals("=")) {
