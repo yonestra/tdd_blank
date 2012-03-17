@@ -37,4 +37,10 @@ public class WikiFormatterTest {
 		String actual = formatter.h1("");
 		assertThat(actual, is(""));
 	}
+	
+	@Test
+	public void h2_Headline() throws Exception {
+		String actual = formatter.h1("== Headline ==");
+		assertThat(actual, is("<h2>Headline</h2>"));
+	}
 }
