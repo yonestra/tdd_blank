@@ -25,4 +25,11 @@ public class WikiFormatterTest {
 		String actual = formatter.h1("= Footline =");
 		assertThat(actual, is("<h1>Footline</h1>"));
 	}
+	
+	@Test
+	public void h1_Null() throws Exception {
+		WikiFormatter formatter = new WikiFormatter();
+		String actual = formatter.h1(null);
+		assertThat(actual, is(""));
+	}
 }
